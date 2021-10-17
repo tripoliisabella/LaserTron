@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, intial-scale=1">
+        <title>LaserTron Home Page</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="calculate.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 id="form_title">LaserTron, Activate!</h1>
+        </header> <br>
+        <div id="form_div">
+            <form name="mm_mils_form">
+                <h3>Convert mm to mils or mils to mm:</h3>
+                <input class="input_fld" type="text" inputmode="numeric" name="mm" id="mm" onchange="onChangeFieldDisable(this)">
+                <label for="mm">mm</label>
+                <label>=</label>
+                <input class="input_fld" type="text" name="result_mils" id="result_mils" onchange="onChangeFieldDisable(this)">
+                <label> mils </label>
+                <input type="button" id="submit_btn" value="Calculate" onclick="validateValues();">
+                <h6 hidden>Test</h6>
+            </form>
+        </div>
+    </body>
+</html>
