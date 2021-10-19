@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    image: itripoli4/lasertron:v1
+    ports: 
+      - 8080
+
+  lt:
+    image: efrecon/localtunnel
+    restart: on-failure
+    command:
+      --local-host web --port 8080 --subdomain lasertron
+    links:
+      - web
+    depends_on:
+      - web

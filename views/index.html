@@ -13,13 +13,16 @@
         </header> <br>
         <div id="form_div">
             <form name="mm_mils_form">
-                <h3>Convert mm to mils or mils to mm:</h3>
+                <h3>Unit Conversions:</h3>
                 <input class="input_fld" type="text" inputmode="numeric" name="mm" id="mm" onchange="onChangeFieldDisable(this)">
-                <label for="mm">mm</label>
-                <label>=</label>
-                <input class="input_fld" type="text" name="result_mils" id="result_mils" onchange="onChangeFieldDisable(this)">
-                <label> mils </label>
+                <label for="mm_label" id="mm_label">mm</label>
+                <label for="equal_label" id="equal_label">=</label>
+                <input class="input_fld" type="text" name="mils" id="mils" onchange="onChangeFieldDisable(this)">
+                <input class="input_fld" type="text" inputmode="numeric" name="inch" id="inch" hidden="true" readonly">
+                <label for="mils_label" id="mils_label"> mils </label>
+                <label for="inch_label" id="inch_label" hidden="true"> inches </label><br><br>
                 <input type="button" id="submit_btn" value="Calculate" onclick="validateValues();">
+                <input type="button" id="clear_btn" value="Clear" onclick="clearValues();">
                 <h6 hidden>Test</h6>
             </form>
         </div>

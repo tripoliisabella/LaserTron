@@ -5,6 +5,7 @@ const app = express();
 const router = express.Router();
 const path = __dirname + '/views/';
 const port = 8080;
+const host='0.0.0.0'
 
 const urlEncodedParser = bodyParser.urlencoded({ extended: true }); 
 const bodyParserJson = bodyParser.json();
@@ -34,6 +35,5 @@ router.get('/', function(req,res){
 app.use(express.static(path));
 app.use('/', router);
 
-app.listen(port, function () {
-  console.log('App listening on port 8080!')
-})
+app.listen(port, host) 
+console.log('App running on http://'+host+':'+port);
