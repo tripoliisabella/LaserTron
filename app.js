@@ -4,12 +4,15 @@ const { response } = require('express');
 const app = express();
 const router = express.Router();
 const path = __dirname + '/views/';
-const port = 8080;
 const host='0.0.0.0'
 
 const urlEncodedParser = bodyParser.urlencoded({ extended: true }); 
 const bodyParserJson = bodyParser.json();
+let port = process.env.PORT; 
 
+if (port == null || port == ""){
+   port = 8082;
+}
 router.use(function (req,res,next) {
   console.log('/' + req.method);
   next();
