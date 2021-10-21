@@ -5,6 +5,9 @@
   "author": "Isabella Tripoli <tripoli.isabella@gmail.com>",
   "license": "MIT",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "engines": {
     "node": "14.16.0"
   },
