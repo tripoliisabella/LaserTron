@@ -9,15 +9,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 let port = process.env.PORT; 
+
+if (port == null || port == ""){
+  port = 8082;
+}
 app.listen(port, () => {
     console.log("App is listening on port 8082");
 });
 
-
-
-if (port == null || port == ""){
-   port = 8082;
-}
 
 app.get('/', function(req,res){
   res.render('index.html');

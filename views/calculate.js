@@ -1,18 +1,20 @@
-function validateValues(){
-    let mils = document.getElementById('mils');
-    let mm = document.getElementById('mm');
-    let errorMsgTag = document.getElementsByTagName('h6')[0];
+function validateValues(primaryObj, secondaryObj, errorObj){
+    let obj1 = document.getElementById(primaryObj);
+    let obj2 = document.getElementById(secondaryObj);
 
-    if(mm.value === '' && mils.value === ''){
-        errorMsgTag.innerText = "Please enter a number to convert."
-        errorMsgTag.removeAttribute('hidden');
-        return; 
+    if(obj1.value != '' || obj2.value != ''){
+        document.getElementById(errorObj).innerText = ' ';
+        if(primaryObj==='mm'&&secondaryObj==='mils'){
+           calculateMmToMils(obj1, obj2); 
+        }
+        else if(primaryObj==='wavelen'&&secondaryObj==='wavenum'){
+            calculateWavelen_waveNum(obj1, obj2); 
+        }
     }
     else{
-        errorMsgTag.setAttribute('hidden', true)
+        document.getElementById(errorObj).innerText = "Please enter a number to convert."
+        return 0;
     }
-    
-    calculate(mils, mm, errorMsgTag);
 }
 
 function swapMils_Inches(expose, expose_label, hide, hide_label){
@@ -23,7 +25,7 @@ function swapMils_Inches(expose, expose_label, hide, hide_label){
     expose.removeAttribute('hidden');
 }
 
-function calculate(mils, mm, errorMsgTag) {
+function calculateMmToMils(mm, mils) {
     let inch = document.getElementById('inch');
     let inch_label = document.getElementById('inch_label');
     let mils_label = document.getElementById('mils_label');
@@ -41,18 +43,28 @@ function calculate(mils, mm, errorMsgTag) {
     }
     
     if (!(mils.value === '')){
-        let calculatedValue = (mils.value*127)/5000;
-        mm.value = calculatedValue ;
+        mm.value = (mils.value*127)/5000;
     }
-
-    return errorMsgTag.innerText = "Success";
-
+    return;
 }
 
-function clearValues(){
-    document.getElementById('mils').value='';
-    document.getElementById('mm').value='';
-    document.getElementById('inch').value=''
+function calculateWavelen_waveNum(waveLen,waveNum){
+    if(waveNum.value!='')
+    {
+        waveLen.value=waveNum.value*(1/10000000);
+    }
+    else{
+        waveNum.value=waveLen.value*(10000000);
+    }
+    return;
+}
+
+function clearValues(objList){
+    let objListArr = objList.split(';');
+
+    for(var i = 0; i < objListArr.length; i++){
+        document.getElementById(objListArr[i]).value='';
+    }
 }
 
 function onChangeFieldDisable(obj){
