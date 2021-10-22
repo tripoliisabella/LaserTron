@@ -51,10 +51,10 @@ function calculateMmToMils(mm, mils) {
 function calculateWavelen_waveNum(waveLen,waveNum){
     if(waveNum.value!='')
     {
-        waveLen.value=waveNum.value*(1/10000000);
+        waveLen.value=(1/waveNum.value)*(10000000);
     }
     else{
-        waveNum.value=waveLen.value*(10000000);
+        waveNum.value=(10000000)/waveLen.value;
     }
     return;
 }
