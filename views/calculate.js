@@ -1,88 +1,90 @@
-function validateValues(primaryObj, secondaryObj, errorObj){
-    let obj1 = document.getElementById(primaryObj);
-    let obj2 = document.getElementById(secondaryObj);
-
-    if(obj1.value != '' || obj2.value != ''){
-        document.getElementById(errorObj).innerText = ' ';
-        if(primaryObj==='mm'&&secondaryObj==='mils'){
-           calculateMmToMils(obj1, obj2); 
-        }
-        else if(primaryObj==='wavelen'&&secondaryObj==='wavenum'){
-            calculateWavelen_waveNum(obj1, obj2); 
-        }
+function onChangeCalculateValue(obj, newValueObj){
+    if(obj.id === 'mm' || obj.id === 'mils'){
+        calculateMm_Mils(obj, newValueObj);
     }
-    else{
-        document.getElementById(errorObj).innerText = "Please enter a number to convert."
-        return 0;
+    else if(obj.id === 'wavelen' || obj.id === 'wavenum'){
+        calculateWavelen_waveNum(obj, newValueObj);
+    }
+
+    else if(obj.id ==="seconds" || obj.id === 'hertz'){
+        calculateSec_Htz(obj, newValueObj);
     }
 }
 
-function swapMils_Inches(expose, expose_label, hide, hide_label){
-    hide.setAttribute('hidden', true);
-    hide_label.setAttribute('hidden', true);
+function calculateMm_Mils(obj, newValueObj) {
+    if ((obj.id === 'mm') && obj.value != ''){
+        let inch = document.getElementById('inch');
+        let inch_label = document.getElementById('inch_label');
+        let mils_label = document.getElementById('mils_label');
 
-    expose_label.removeAttribute('hidden');
-    expose.removeAttribute('hidden');
-}
-
-function calculateMmToMils(mm, mils) {
-    let inch = document.getElementById('inch');
-    let inch_label = document.getElementById('inch_label');
-    let mils_label = document.getElementById('mils_label');
-
-    if (!(mm.value === '')){
-        let calculatedValue = (mm.value*5000)/127;
+        let calculatedValue = (obj.value*5000)/127;
         if (calculatedValue >= 1000){
-            swapMils_Inches(inch, inch_label, mils, mils_label);
             inch.value = (calculatedValue/1000).toFixed(8);
         }
         else{
-            swapMils_Inches(mils, mils_label, inch, inch_label);
+            inch.value = '';
         }
-        mils.value = calculatedValue;
+        newValueObj.value = calculatedValue;
     }
     
-    if (!(mils.value === '')){
-        mm.value = (mils.value*127)/5000;
+    else if ((obj.id === 'mils') && obj.value != ''){
+        newValueObj.value = (obj.value*127)/5000;
+        inch.value = '';
+    }
+    else {
+        newValueObj.value = '';
     }
     return;
 }
 
-function calculateWavelen_waveNum(waveLen,waveNum){
-    if(waveNum.value!='')
+function calculateWavelen_waveNum(obj,newValueObj){
+    if(obj.id === 'wavenum' && obj.value != '')
     {
-        waveLen.value=(1/waveNum.value)*(10000000);
+        newValueObj.value=(1/obj.value)*(10000000);
+    }
+    else if(obj.id === 'wavelen' && obj.value != ''){
+        newValueObj.value=(10000000)/obj.value;
     }
     else{
-        waveNum.value=(10000000)/waveLen.value;
+        newValueObj.value = '';
     }
     return;
 }
 
-function clearValues(objList){
-    let objListArr = objList.split(';');
-
-    for(var i = 0; i < objListArr.length; i++){
-        document.getElementById(objListArr[i]).value='';
+function calculateSec_Htz(obj, newValueObj) {
+    let obj_unit = document.getElementById(obj.id + "_dropdown");
+    let newValueObj_unit = document.getElementById(newValueObj.id + "_dropdown");
+    
+    if(obj.value != ''){
+        newValueObj.value = (1/(obj.value*unitConversion(obj_unit.value)))*unitConversion(newValueObj_unit.value);
+    }
+    else{
+        newValueObj.value = '';
     }
 }
 
-function onChangeFieldDisable(obj){
-    let mils = document.getElementById('mils');
-    let inch = document.getElementById('inch');
-    let inch_label = document.getElementById('inch_label');
-    let mils_label = document.getElementById('mils_label');
+function unitConversion (unit){
+    let retVal = 1;
+    switch (unit){
+        case "milli": 
+            retVal = 0.001;
+            break;
+        case "micro":
+            retVal = 0.000001;
+            break;
+        case "nano":
+            retVal = 0.000000001; 
+            break;
+        case "mega":
+            retVal = 1000000;
+            break;
+        case "kilo":
+            retVal = 1000;
+            break;
+        default: 
+            retVal = 1;
+            break;
+    }
 
-    if (obj.id === 'mm' && obj.value > 0 ){
-        document.getElementById('mils').setAttribute('readonly', true);
-    }
-    else if (obj.id === 'mils' && obj.value > 0 ){
-        document.getElementById('mm').setAttribute('readonly', true);
-    }
-    else{
-        swapMils_Inches(mils, mils_label, inch, inch_label);
-        clearValues();
-        document.getElementById('mils').removeAttribute('readonly');
-        document.getElementById('mm').removeAttribute('readonly');
-    }
+    return retVal;
 }

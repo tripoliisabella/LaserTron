@@ -11,32 +11,50 @@
         <header>
             <h1 id="form_title">LaserTron, Activate!</h1>
         </header> <br>
-        <div id="form_div">
-            <h3>Unit Conversions:</h3>
-            <div name="mm_mils">
-                <input class="input_fld" type="text" inputmode="numeric" name="mm" id="mm" onchange="onChangeFieldDisable(this)">
-                <label for="mm_label" id="mm_label">mm</label>
-                <label for="equal_label" id="equal_label">=</label>
-                <input class="input_fld" type="text" name="mils" id="mils" onchange="onChangeFieldDisable(this)">
-                <input class="input_fld" type="text" inputmode="numeric" name="inch" id="inch" hidden="true" readonly">
-                <label for="mils_label" id="mils_label"> mils </label>
-                <label for="inch_label" id="inch_label" hidden="true"> inches </label><br><br>
-                <input type="button" id="submit_btn" value="Calculate" onclick="validateValues('mm', 'mils', 'mm_mils_error');">
-                <input type="button" id="clear_btn" value="Clear" onclick="clearValues('mm;mils;inch');">
-                <h5 id="mm_mils_error"></h5>
+        <div id="main_div">
+            <div id="unit_div1">
+                <h3>Unit Conversions:</h3>
+                <div id="mm_mils">
+                    <input class="input_fld" type="text" inputmode="numeric" id="mm" onchange="onChangeCalculateValue(this, document.getElementById('mils'))">
+                    <label for="mm_label" id="mm_label">mm</label>
+                    <label for="equal_label" id="equal_label">=</label>
+                    <input class="input_fld" type="text"inputmode="numeric" id="mils" onchange="onChangeCalculateValue(this, document.getElementById('mm'))">
+                    <label for="mils_label" id="mils_label"> mils </label>
+                    <label for="equal_label" id="equal_label">=</label>
+                    <input class="input_fld" type="text" inputmode="numeric" id="inch" readonly>
+                    <label for="inch_label" id="inch_label"> inches </label><br><br>
+                </div> 
             </div>
-            <br>
-            <h3>Calculate Wavenumber and Wavelength:</h3>
-            <div name="wavenum_wavelength">
-                <input class="input_fld" type="text" inputmode="numeric" name="wavelen" id="wavelen" onchange="onChangeFieldDisable(this)">
-                <label for="wavelen_label" id="wavelen_label">nm</label>
-                <label for="equal_label" id="equal_label">=</label>
-                <input class="input_fld" type="text" inputmode="numeric" name="wavenum" id="wavenum" onchange="onChangeFieldDisable(this)">
-                <label for="wavenum_label" id="wavenum_label">cm<sup>-1</sup></label>
-                <br><br>
-                <input type="button" id="calculate_btn" value="Calculate" onclick="validateValues('wavelen','wavenum','wave_props_error');">
-                <input type="button" id="clear_btn" value="Clear" onclick="clearValues('wavenum;wavelen');">
-                <h5 id="wave_props_error"></h5>
+            <hr>
+            <div id="wave_div2">
+                <h3>Calculate Wavenumber and Wavelength:</h3>
+                <div id="wavenum_wavelength">
+                    <input class="input_fld" type="text" inputmode="numeric" id="wavelen" onchange="onChangeCalculateValue(this, document.getElementById('wavenum'))">
+                    <label for="wavelen_label" id="wavelen_label">nm</label>
+                    <label for="equal_label" id="equal_label">=</label>
+                    <input class="input_fld" type="text" inputmode="numeric" id="wavenum" onchange="onChangeCalculateValue(this, document.getElementById('wavelen'))">
+                    <label for="wavenum_label" id="wavenum_label">cm<sup>-1</sup></label>
+                </div>
+            </div>
+            <hr>
+            <div id="freq_div3">
+                <h3>Calculate Frequency:</h3>
+                <div id="frequency">
+                    <input class="input_fld" type="text" inputmode="numeric" id="seconds" onchange="onChangeCalculateValue(this, document.getElementById('hertz'))">
+                    <select id="seconds_dropdown" onchange="onChangeCalculateValue(document.getElementById('seconds'), document.getElementById('hertz'))">
+                        <option value="sec">s</option>
+                        <option value="milli">ms</option>
+                        <option value="micro">μs</option>
+                        <option value="nano">ns</option>                   
+                    </select>
+                    <label for="equal_label" id="equal_label">=</label>
+                    <input class="input_fld" type="text" inputmode="numeric" id="hertz" onchange="onChangeCalculateValue(this, document.getElementById('seconds'))">
+                    <select id="hertz_dropdown" onchange="onChangeCalculateValue(document.getElementById('hertz'), document.getElementById('seconds'))">
+                        <option value="hz">Hz</option>
+                        <option value="kilo">kHz</option>
+                        <option value="mega">MHz</option>                       
+                    </select>
+                </div>
             </div>
         </div>
     </body>
