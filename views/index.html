@@ -15,10 +15,10 @@
             <div id="unit_div1">
                 <h3>Unit Conversions:</h3>
                 <div id="mm_mils">
-                    <input class="input_fld" type="text" inputmode="numeric" id="mm" onchange="onChangeCalculateValue(this, document.getElementById('mils'))">
+                    <input class="input_fld" type="text" inputmode="numeric" id="mm" step="any" min="0" onchange="onChangeCalculateValue(this, document.getElementById('mils'))">
                     <label for="mm_label" id="mm_label">mm</label>
                     <label for="equal_label" id="equal_label">=</label>
-                    <input class="input_fld" type="text"inputmode="numeric" id="mils" onchange="onChangeCalculateValue(this, document.getElementById('mm'))">
+                    <input class="input_fld" type="text"inputmode="numeric" id="mils" step="any" min="0" onchange="onChangeCalculateValue(this, document.getElementById('mm'))">
                     <label for="mils_label" id="mils_label"> mils </label>
                     <label for="equal_label" id="equal_label">=</label>
                     <input class="input_fld" type="text" inputmode="numeric" id="inch" readonly>
@@ -29,10 +29,10 @@
             <div id="wave_div2">
                 <h3>Calculate Wavenumber and Wavelength:</h3>
                 <div id="wavenum_wavelength">
-                    <input class="input_fld" type="text" inputmode="numeric" id="wavelen" onchange="onChangeCalculateValue(this, document.getElementById('wavenum'))">
+                    <input class="input_fld" type="text" inputmode="numeric" id="wavelen" step="any" min="0" onchange="onChangeCalculateValue(this, document.getElementById('wavenum'))">
                     <label for="wavelen_label" id="wavelen_label">nm</label>
                     <label for="equal_label" id="equal_label">=</label>
-                    <input class="input_fld" type="text" inputmode="numeric" id="wavenum" onchange="onChangeCalculateValue(this, document.getElementById('wavelen'))">
+                    <input class="input_fld" type="text" inputmode="numeric" id="wavenum" step="any" min="0" onchange="onChangeCalculateValue(this, document.getElementById('wavelen'))">
                     <label for="wavenum_label" id="wavenum_label">cm<sup>-1</sup></label>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div id="freq_div3">
                 <h3>Calculate Frequency:</h3>
                 <div id="frequency">
-                    <input class="input_fld" type="text" inputmode="numeric" id="seconds" onchange="onChangeCalculateValue(this, document.getElementById('hertz'))">
+                    <input class="input_fld" type="text" inputmode="numeric" id="seconds" step="any" min="0"onchange="onChangeCalculateValue(this, document.getElementById('hertz'))">
                     <select id="seconds_dropdown" onchange="onChangeCalculateValue(document.getElementById('seconds'), document.getElementById('hertz'))">
                         <option value="sec">s</option>
                         <option value="milli">ms</option>
@@ -48,7 +48,7 @@
                         <option value="nano">ns</option>                   
                     </select>
                     <label for="equal_label" id="equal_label">=</label>
-                    <input class="input_fld" type="text" inputmode="numeric" id="hertz" onchange="onChangeCalculateValue(this, document.getElementById('seconds'))">
+                    <input class="input_fld" type="text" inputmode="numeric" id="hertz" step="any" min="0" onchange="onChangeCalculateValue(this, document.getElementById('seconds'))">
                     <select id="hertz_dropdown" onchange="onChangeCalculateValue(document.getElementById('hertz'), document.getElementById('seconds'))">
                         <option value="hz">Hz</option>
                         <option value="kilo">kHz</option>
